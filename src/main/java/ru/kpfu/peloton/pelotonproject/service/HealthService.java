@@ -1,5 +1,8 @@
 package ru.kpfu.peloton.pelotonproject.service;
 
-public interface HealthService {
+import org.springframework.stereotype.Service;
+
+@Service
+public class HealthService {
 
 }

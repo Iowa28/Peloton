@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.List;
 @Table(name = "USERS")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstname;
     private String lastname;
@@ -23,7 +24,7 @@ public class User {
 
 
     @ManyToMany(mappedBy = "users")
-    private List<Webinar> webinars;
+    private List<Webinar> webinars = new ArrayList<>();
     @OneToOne
     private UserInfo userInfo;
     @OneToOne

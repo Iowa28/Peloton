@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.kpfu.peloton.pelotonproject.dto.WebinarDto;
 import ru.kpfu.peloton.pelotonproject.service.WebinarService;
@@ -32,8 +33,9 @@ public class WebinarController {
         return "redirect:/online_webinars";
     }
 
-    @PostMapping("/join_webinar")
-    public String joinWebinar(String email) {
-        return webinarService.addUserToWebinar(email);
+    @PostMapping("/{id}/join_webinar")
+    public String joinWebinar(@PathVariable("id") Long id, String email) {
+        webinarService.addUserToWebinar(id, email);
+        return "redirect:/";
     }
 }

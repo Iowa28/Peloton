@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Entity
 public class UserInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate birthday;
     private LocalDate registrationDate;
