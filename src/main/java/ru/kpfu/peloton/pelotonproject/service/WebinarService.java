@@ -12,6 +12,7 @@ import ru.kpfu.peloton.pelotonproject.repository.UserRepository;
 import ru.kpfu.peloton.pelotonproject.repository.WebinarRepository;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,17 +24,28 @@ public class WebinarService {
     private final UserRepository userRepository;
 
     public void createWebinar(WebinarDto webinarDto) {
-        List<User> users = webinarDto.getUsers().stream()
-                .map(userEmail -> userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new))
-                .collect(Collectors.toList());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        StringBuilder start = new StringBuilder(webinarDto.getStartDate());
+        start.setCharAt(10, ' ');
+        StringBuilder end = new StringBuilder(webinarDto.getEndDate());
+        end.setCharAt(10, ' ');
+
         Webinar webinar = Webinar.builder()
                 .name(webinarDto.getName())
                 .description(webinarDto.getDescription())
-                .startDate(webinarDto.getStartDate())
-                .endDate(webinarDto.getEndDate())
+                .coachName(webinarDto.getCoach())
+                .startDate(LocalDateTime.parse(start, formatter))
+                .endDate(LocalDateTime.parse(end, formatter))
                 .link(webinarDto.getLink())
-                .users(users)
                 .build();
+
+        if (webinarDto.getUsers() != null && !webinarDto.getUsers().isEmpty()) {
+            List<User> users = webinarDto.getUsers().stream()
+                    .map(userEmail -> userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new))
+                    .collect(Collectors.toList());
+            webinar.setUsers(users);
+        }
+
         webinarRepository.save(webinar);
     }
 
@@ -53,6 +65,4 @@ public class WebinarService {
         webinar.getUsers().add(user);
         webinarRepository.save(webinar);
     }
-
-
 }

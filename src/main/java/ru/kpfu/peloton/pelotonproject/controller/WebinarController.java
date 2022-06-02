@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.kpfu.peloton.pelotonproject.dto.WebinarDto;
 import ru.kpfu.peloton.pelotonproject.service.WebinarService;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @RequiredArgsConstructor
 public class WebinarController {
 
-    private WebinarService webinarService;
+    private final WebinarService webinarService;
 
     @GetMapping("/online_webinars")
     public String getOnlineWebinarsPage(ModelMap map) {
@@ -25,6 +28,12 @@ public class WebinarController {
     public String getOfflineWebinarsPage(ModelMap map) {
         map.addAttribute("webinars", webinarService.getWebinarRecords());
         return "offline_webinars";
+    }
+
+    @GetMapping("/webinar_form")
+    public String getWebinarForm(ModelMap map) {
+        map.addAttribute("webinar", new WebinarDto());
+        return "new_veb";
     }
 
     @PostMapping("/create_webinar")

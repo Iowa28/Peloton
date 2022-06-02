@@ -1,7 +1,6 @@
 package ru.kpfu.peloton.pelotonproject.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 import ru.kpfu.peloton.pelotonproject.dto.UserDto;
@@ -21,22 +20,21 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     private final WebinarRepository webinarRepository;
 
     public void updateUser(Long userId, UserDto userDto) {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        if (StringUtils.isEmpty(userDto.getFirstname())) {
+        if (!StringUtils.isEmpty(userDto.getFirstname())) {
             user.setFirstname(userDto.getFirstname());
         }
-        if (StringUtils.isEmpty(userDto.getLastname())) {
+        if (!StringUtils.isEmpty(userDto.getLastname())) {
             user.setLastname(userDto.getLastname());
         }
-        if (StringUtils.isEmpty(userDto.getEmail())) {
+        if (!StringUtils.isEmpty(userDto.getEmail())) {
             user.setEmail(userDto.getEmail());
         }
-        if (StringUtils.isEmpty(userDto.getPassword())) {
-            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        if (!StringUtils.isEmpty(userDto.getPassword())) {
+            user.setPassword(userDto.getPassword());
         }
         if (userDto.getBirthday() != null) {
             user.getUserInfo().setBirthday(userDto.getBirthday());
@@ -50,7 +48,7 @@ public class UserService {
         if (userDto.getIsCoach() != null) {
             user.getUserInfo().setCoach(userDto.getIsCoach());
         }
-        if (StringUtils.isEmpty(userDto.getAvatarUrl())) {
+        if (!StringUtils.isEmpty(userDto.getAvatarUrl())) {
             user.getUserInfo().setAvatarUrl(userDto.getAvatarUrl());
         }
         if (userDto.getWeight() != null) {
@@ -71,7 +69,7 @@ public class UserService {
         if (userDto.getSlept() != null) {
             user.getUserCharacteristics().setSlept(userDto.getSlept());
         }
-        if (!userDto.getWebinars().isEmpty()) {
+        if (userDto.getWebinars() != null && !userDto.getWebinars().isEmpty()) {
             List<Webinar> webinars = userDto.getWebinars().stream()
                     .map(webinarName -> webinarRepository.findByName(webinarName).orElseThrow(WebinarNotFoundException::new))
                     .collect(Collectors.toList());

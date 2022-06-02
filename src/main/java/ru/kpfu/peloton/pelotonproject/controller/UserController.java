@@ -17,6 +17,16 @@ public class UserController {
     private final SignUpService signUpService;
     private final UserService userService;
 
+    @GetMapping("/intro")
+    public String getIntroPage() {
+        return "intro";
+    }
+
+    @GetMapping("/sign_up")
+    public String getSignUpPage() {
+        return "sign_up";
+    }
+
     @GetMapping("/sign_in")
     public String getSignInPage() {
         return "sign_in";
@@ -25,7 +35,7 @@ public class UserController {
     @PostMapping("/sign_in")
     public String signIn(String email, String password) {
         if (signUpService.signIn(email, password)) {
-            return "main";
+            return "main_menu";
         }
         return "redirect:/sign_in";
     }
@@ -33,7 +43,7 @@ public class UserController {
     @GetMapping("/main")
     public String getMainPage(ModelMap map) {
         map.addAttribute("test", "Привет");
-        return "main";
+        return "main_menu";
     }
 
     @GetMapping("/health/{user-id}")

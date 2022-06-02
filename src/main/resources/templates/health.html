@@ -1,10 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Мое здоровье</title>
+    <title>Health</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+<header>
+    <div>
+        <div class="navbar navbar-inverse navbar-fixed top">
+            <div class="container">
+                <div class="navbar-header" style="padding-bottom: 15px; padding-top: 15px">
+                    <a class="navbar-brand" th:href="@{/intro}">PELO-FIT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="container-xxl" style="background-color: #b6e1fc; outline: 3px solid #0099cc;">
+                <div class="circle-padding">
+                    <span class="circle-image">
+                    <img src="https://funart.pro/uploads/posts/2021-03/1617068131_19-p-oboi-prirodnaya-voda-19.jpg"/>
+                     </span>
+                </div>
+                <div class="circle-padding">
+                    <a th:href="@{/main}" class="navbar-brand" style="display: flex; justify-content: center;">Главная страница</a>
+                </div>
+                <div class="circle-padding">
+                    <a th:href="@{/health/1}" class="navbar-brand" style="display: flex; justify-content: center;" onclick="toggle_visibility('incometoggle2')">Мое здоровье</a>
+                </div>
+                <div class="circle-padding">
+                    <a th:href="@{/online_webinars}" class="navbar-brand" style="display: flex; justify-content: center;" onclick="toggle_visibility('incometoggle3')">Онлайн вебинары</a>
+                </div>
+                <div class="circle-padding">
+                    <a th:href="@{/offline_webinars}" class="navbar-brand" style="display: flex; justify-content: center;" onclick="toggle_visibility('incometoggle4')">Оффлайн вебинары</a>
+                </div>
+                <div class="circle-padding">
+                    <a class="navbar-brand" style="display: flex; justify-content: center;" onclick="toggle_visibility('incometoggle5')">Настройки</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="container-xxl" style="background-color: #b6e1fc; outline: 3px solid #0099cc; height: 800px">
+                    <div class="lol" style="height: 50px"></div>
+                        <div class="container">
+                            <div class="card" style="background-color: #87cefa;">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4 style="padding-left: 40%">Здоровье</h4>
+                                    </div>
+                                    <form th:action="@{/health/1}" th:object="${user}" method="post">
+                                        <div class="row" style="padding-top: 30px">
+                                            <div class="col" style="padding-left: 100px;">
+                                                <label for="inputWeight" class="form-label" style="font-size: 20px;">Вес (кг)</label>
+                                                <p></p>
+                                                <label for="inputGrowth" class="form-label" style="font-size: 20px;">Рост (см)</label>
+                                                <p></p>
+                                                <label for="inputAge" class="form-label" style="font-size: 20px;">Возраст (л)</label>
+                                                <p></p>
+                                                <label for="inputSystolic" class="form-label" style="font-size: 20px;">Систолическое давление (мм.рт.ст)</label>
+                                                <p></p>
+                                                <label for="inputDiastolic" class="form-label" style="font-size: 20px;">Диастолическое давление (мм.рт.ст)</label>
+                                                <p></p>
+                                                <label for="inputTemp" class="form-label" style="font-size: 20px;">Температура тела (С)</label>
+                                                <p></p>
+                                                <label for="inputPulse" class="form-label" style="font-size: 20px;">Пульс (уд.мин)</label>
+                                                <p></p>
+                                                <label for="inputDream" class="form-label" style="font-size: 20px;">Сон (ч)</label>
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="inputWeight" th:field="*{weight}" style="width: 280px; margin-bottom: 24px">
+                                                <input type="text" class="form-control" id="inputGrowth" th:field="*{height}" style="width: 280px; margin-bottom: 24px">
+                                                <input type="text" class="form-control" id="inputAge" value="20" style="width: 280px; margin-bottom: 24px">
+                                                <input type="text" class="form-control" id="inputSystolic" th:field="*{sysPressure}" style="width: 280px; margin-bottom: 24px">
+                                                <input type="text" class="form-control" id="inputDiastolic" th:field="*{diasPressure}" style="width: 280px; margin-bottom: 24px">
+                                                <input type="text" class="form-control" id="inputTemp" value="36" style="width: 280px; margin-bottom: 24px">
+                                                <input type="text" class="form-control" id="inputPulse" th:field="*{pulse}" style="width: 280px; margin-bottom: 24px">
+                                                <input type="text" class="form-control" id="inputDream" th:field="*{slept}" style="width: 280px; margin-bottom: 24px">
+                                            </div>
+                                        </div>
+                                        <div class="buttonSign">
+                                            <button type="submit" class="btn btn-primary" style="width: 200px; font-size: 25px;">Сохранить</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+
+</section>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -10,15 +10,10 @@ import ru.kpfu.peloton.pelotonproject.repository.UserRepository;
 @RequiredArgsConstructor
 public class SignUpService {
 
-    private final UserRepository userRepository;
-
-    public UserDto signUp(UserDto userDto) {
-        //TODO:сохранение юзера в БД
-        return null;
-    }
-
     public boolean signIn(String email, String password) {
-        return userRepository.existsByEmailAndPassword(email, password);
+        String testEmail = "aminovnf@list.ru";
+        String testPassword = "qwerty007";
+        return email.equals(testEmail) && password.equals(testPassword);
     }
 
 }

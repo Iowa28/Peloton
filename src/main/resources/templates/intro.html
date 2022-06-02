@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+<!--    <link rel="stylesheet" href="/css/style.css">-->
+    <title>Pelo-Fit</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+<body>
+    <div>
+        <div class="navbar navbar-inverse navbar-fixed top">
+            <div class="container">
+                <div class="navbar-header" style="padding-bottom: 15px; padding-top: 15px">
+                    <a class="navbar-brand" th:href="@{/intro}">PELO-FIT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div id="headerwrap">
+            <div class="container">
+                <div class="row centered">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1>Welcome to Pelo-Fit!
+                        <h2>Let's start together</h2>
+                        </h1>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card" style="width: 15rem; background-color: #141414">
+                            <div class="text-center">
+                                <h5 class="card-title">PELO-FIT</h5>
+                                <form name="signUp" th:action="@{/sign_up}" style="padding-bottom: 20px" method="get">
+                                    <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+                                </form>
+                                <form name="LogIn" th:action="@{/sign_in}" method="get">
+                                    <button type="submit" class="btn btn-outline-primary btn-lg">Log In</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="navbar navbar-inverse navbar-fixed top">
+            <div class="container">
+                <div class="navbar-header" style="padding-bottom: 70px; padding-top: 15px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
+</html>
