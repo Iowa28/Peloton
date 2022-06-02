@@ -15,14 +15,14 @@ public class UserDto {
     private String password;
     private LocalDate birthday;
     private LocalDate registrationDate;
-    private boolean isPremium;
-    private boolean isCoach;
+    private Boolean isPremium;
+    private Boolean isCoach;
     private String avatarUrl;
-    private double weight;
-    private double pulse;
-    private double height;
-    private double sysPressure;
-    private double diasPressure;
-    private int slept;
+    private Double weight;
+    private Double pulse;
+    private Double height;
+    private Double sysPressure;
+    private Double diasPressure;
+    private Integer slept;
     private List<String> webinars;
 }
